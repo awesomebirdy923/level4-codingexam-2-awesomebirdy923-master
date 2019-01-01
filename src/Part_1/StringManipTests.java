@@ -1,13 +1,20 @@
 package Part_1;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
 
-class StringManipTests {
+import org.junit.Test;
 
+public class StringManipTests {
+
+	public StringManipTests(){
+		
+	}
+	
 	@Test
-	void test() {
+	public void test() {
 		assertEquals(123, sumStringDigits("abc123xyz"));
 		assertEquals(44, sumStringDigits("aa11b33"));
 		assertEquals(18, sumStringDigits("7 11"));
@@ -29,29 +36,23 @@ class StringManipTests {
 	 */
 	public int sumStringDigits(String str) {
 		int count = 0;
-		boolean countMode = false;
+		boolean[] isNumbers = new boolean[str.length()];
 		String currentNum = "0";
-		int lastIndex = 0;
-		int[] numbers = new int[str.length()];
-		int currentIndex = 0;
 		for (int i = 0; i < str.length(); i++) {
-			if(countMode && !Character.isDigit(str.charAt(i))) {
-				currentIndex++;
-				currentNum = str.substring(lastIndex, lastIndex + currentIndex);
-			}else {
-				countMode = false;
-				numbers[numbers.length] = Integer.parseInt(currentNum);
-				currentIndex = 0;
-			}
-			if(Character.isDigit(str.charAt(i+1))) {
-				lastIndex = i;
-				countMode = true;
-			}else {
-				countMode = false;
+			if(Character.isDigit(str.charAt(i))){
+				isNumbers[i] = true;
 			}
 		}
-		for (int i = 0; i < numbers.length; i++) {
-			count+=numbers[i];
+		for (int i = 0; i < isNumbers.length; i++) {
+			if(isNumbers[i]){
+				currentNum+=str.charAt(i);
+			}else{
+				count+=Integer.parseInt(currentNum);
+				currentNum = "0";
+			}
+		}
+		if(isNumbers.length > 1 && isNumbers[isNumbers.length-1]){
+			count+=Integer.parseInt(currentNum);
 		}
 		return count;
 	}

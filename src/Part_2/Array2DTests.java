@@ -1,13 +1,13 @@
 package Part_2;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class Array2DTests {
+public class Array2DTests {
 
 	@Test
-	void test() {
+	public void test() {
 		Integer[][] nums = {
 				{0, 1, 2},
 				{3, 4, 5},
